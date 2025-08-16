@@ -82,3 +82,137 @@ amountOfRows.addEventListener("keydown", function (e) {
     return;
   }
 });
+
+//
+//
+//
+
+const array = [
+  "eggs",
+  "milk",
+  "cheese",
+  "garlic",
+  "onion",
+  "tomate",
+  "salt",
+  "pepper",
+];
+
+const lastOne = array.pop();
+console.log(lastOne);
+array.push("grapes");
+console.log(array);
+
+const firstOne = array.shift();
+console.log(firstOne);
+array.unshift("cottage cheese");
+console.log(array);
+
+console.log(array.slice(2, 5));
+console.log(array.splice(3, 3));
+
+let listItem = array
+  .map(function (singleIngredient) {
+    return `<li>${singleIngredient}</li>`;
+  })
+  .join("");
+
+console.log(listItem);
+document.getElementById("ingredients").innerHTML = listItem;
+
+//
+//
+//
+
+function doMath(value, mathToDo) {
+  let result = mathToDo(value); // function(4)
+  return result;
+}
+
+const result = doMath(4, function (pepe) {
+  return pepe * 100;
+});
+
+console.log(result);
+
+//
+//
+//
+
+const prices = [5, 5, 5, 4, 5];
+let total = prices.reduce(function (previousValue, currentValue) {
+  return previousValue + currentValue;
+}, 0);
+
+console.log(total);
+
+//
+//
+//
+
+array.push("tomate");
+console.log(
+  array.filter(function (ingredient) {
+    return ingredient.endsWith("e");
+  })
+);
+
+//
+//
+
+const [pepe, pepa, cara, boca] = array;
+console.log(pepe);
+
+console.log(...array);
+const arrayTwo = [...array];
+console.log(arrayTwo);
+
+const games = ["zelda", "mario", "pokemon"];
+const gamesCopy = games;
+const gamesShallowCopy = [...games];
+console.log("games copy: " + gamesCopy);
+console.log(games);
+console.log(gamesShallowCopy);
+
+gamesCopy.push("metroid");
+gamesShallowCopy.push("paralel");
+
+console.log(gamesCopy);
+console.log(games);
+console.log(gamesShallowCopy);
+
+//
+//
+//
+
+const person = {};
+person.hair = "black";
+person.hands = 2;
+person.name = {
+  firstName: "fidel",
+  lastName: "nieto",
+};
+
+console.log(person.name);
+console.log(person.name.firstName);
+
+for (const key in person) {
+  console.log(`${key}: ${person[key]}`);
+}
+
+const test1 = { test: "1", test2: "2" };
+const test2 = { test: "1", test2: "2" };
+
+console.log(test1 === test2);
+
+const test4 = { ...test1 };
+test4.test3 = "3";
+const test3 = test2;
+test3.test = "2";
+
+console.log(test2 === test3);
+
+test3.test3 = "3";
+console.log(test3);
+
+console.log(test1);
