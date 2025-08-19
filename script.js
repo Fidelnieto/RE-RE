@@ -216,3 +216,225 @@ test3.test3 = "3";
 console.log(test3);
 
 console.log(test1);
+
+//
+//
+//
+
+const user = { username: "starvesito", password: "123456" };
+console.log(user);
+
+const loginStatus = login(user);
+console.log(loginStatus);
+console.warn(`The password is now ${user.password}`);
+
+function login(userCredential) {
+  if (userCredential.password === "123456") {
+    let randomString = Math.random().toString(36).slice(-16);
+    userCredential.password = randomString;
+    return `Terrible password. Your password has been reset to a random string`;
+  }
+  return "Logged in";
+}
+
+console.log(user);
+
+function sortList(sortBy, ...items) {
+  console.log(items);
+}
+
+sortList("alphabetical", "jose", "fidel", "mario");
+//
+//
+//
+
+function makeList() {
+  let numberedList = "<ol>";
+  for (let i = 0; i < arguments.length; i++) {
+    numberedList += `<li>${arguments[i]}</li>`;
+  }
+  numberedList += "</ol>";
+  return numberedList;
+}
+
+// ingredients.innerHTML = makeList(1, 2, 3, 4, 5, 3);
+
+function greetInSpanish(name) {
+  return `Hola ${name}`;
+}
+function getUserName(callback) {
+  // let firstName = prompt("Enter your first name");
+  return callback();
+}
+
+console.log(getUserName(greetInSpanish));
+
+//
+//
+
+function makeUnorderList(array = []) {
+  if (typeof array !== "number" && typeof array !== "string") {
+    let listItem = array.map(function (element) {
+      return `<li>${element}</li>`;
+    });
+    return `<ul>${listItem.join("")}</ul>`;
+  } else {
+    console.log(`Are you trying to put a Number? like ${array}`);
+  }
+}
+
+const ar = [1, 2, 3, 4];
+console.log(makeUnorderList());
+
+//
+
+//
+
+const bookStore = {
+  books: ["Ulysses", "The Great Getaby"],
+  displayBookStore() {
+    const renderTarget = document.getElementById("bookstore");
+    const bookList = this.books.map((book) => `<p>${book}</p>`);
+    renderTarget.innerHTML = bookList.join("");
+
+    shoppingCart.displayCart(this.removeBook.bind(this));
+  },
+  removeBook(title) {
+    let newList = this.books.filter((book) => book != title);
+    this.books = newList;
+    this.displayBookStore();
+  },
+};
+
+const shoppingCart = {
+  itemsInCart: ["The Great Getaby"],
+  handleClick(removeBook) {
+    removeBook(this.itemsInCart);
+  },
+  displayCart(clickHandler) {
+    const renderTarget = document.getElementById("cart");
+    const itemsInCarrito = this.itemsInCart.map((item) => `<p>${item}</p>`);
+    const checkOutButton = "<button id='checkout'>Check Out</button>";
+
+    renderTarget.innerHTML = itemsInCarrito.join("") + checkOutButton;
+
+    document
+      .getElementById("checkout")
+      .addEventListener("click", () => this.handleClick(clickHandler));
+  },
+};
+
+bookStore.displayBookStore();
+
+//
+//
+//
+
+let current = 0;
+
+function render() {
+  count.innerHTML = current;
+}
+
+let count = document.getElementById("numberToCount");
+let buttonIncr = document.getElementById("incr");
+let buttonDecr = document.getElementById("decr");
+let buttonReset = document.getElementById("reset");
+
+buttonIncr.addEventListener("click", () => {
+  current++;
+  render();
+});
+
+buttonDecr.addEventListener("click", () => {
+  current--;
+  render();
+});
+
+buttonReset.addEventListener("click", () => {
+  current = 0;
+  render();
+});
+
+//
+//
+//
+
+const container = document.getElementById("colorRandom");
+const buttonColorChange = document.getElementById("changeColor");
+
+function randomRGBNumber() {
+  return Math.floor(Math.random() * 256);
+}
+
+buttonColorChange.addEventListener("click", () => {
+  container.style.backgroundColor = `rgb(${randomRGBNumber()}, ${randomRGBNumber()}, ${randomRGBNumber()})`;
+});
+
+//
+//
+// Tienes una lista de nombres. Al escribir en un input, se muestran solo los que coinciden con lo que escribes.
+
+const names = [
+  "Fidel",
+  "Jorgelis",
+  "Raul",
+  "Miye",
+  "Angelis",
+  "Alejandro",
+  "Samuel",
+  "Luis",
+  "Diego",
+];
+const inputValueName = document.getElementById("lookForName");
+const displayer = document.getElementById("displayNames");
+
+function renderNames(names) {
+  displayer.innerHTML = "";
+  names.map((name) => {
+    const li = document.createElement("li");
+    li.textContent = name;
+    displayer.appendChild(li);
+  });
+}
+
+renderNames(names);
+
+inputValueName.addEventListener("input", () => {
+  const text = inputValueName.value.toLowerCase();
+  const filtered = names.filter((n) => n.toLowerCase().includes(text));
+  renderNames(filtered);
+});
+
+//
+
+// La compu genera un número aleatorio entre 1 y 100.
+// Tú escribes un número en un input y presionas “Probar”.
+// El programa te dice si es muy alto, muy bajo o correcto.
+
+let randomNumberToGuess;
+const guessValue = document.getElementById("inputToGuess");
+const resultado = document.getElementById("result");
+const buttonToBegin = document.getElementById("begin");
+
+buttonToBegin.addEventListener("click", () => {
+  randomNumberToGuess = Math.floor(Math.random() * 100);
+  console.log(randomNumberToGuess);
+  buttonToBegin.style.display = "none";
+  return randomNumberToGuess;
+});
+
+guessValue.addEventListener("keydown", (e) => {
+  if (e.code === "Enter") {
+    if (guessValue.value == randomNumberToGuess) {
+      resultado.innerHTML = `AMAZING YOU GOT THE NUMBER!! IT WAS ${randomNumberToGuess}`;
+      buttonToBegin.style.display = "";
+    } else if (guessValue.value > randomNumberToGuess) {
+      resultado.innerHTML = `Too high, try one lower`;
+    } else if (guessValue.value < randomNumberToGuess) {
+      resultado.innerHTML = `Too low, try one higher`;
+    }
+  } else if (e.code === "Backspace") {
+    resultado.innerHTML = "";
+  }
+});
