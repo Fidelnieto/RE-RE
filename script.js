@@ -438,3 +438,210 @@ guessValue.addEventListener("keydown", (e) => {
     resultado.innerHTML = "";
   }
 });
+
+//
+//
+// simple to-do list
+
+const inputToDo = document.getElementById("inputToDo");
+const list = document.getElementById("list");
+const buttonToErase = document.getElementById("erase");
+
+inputToDo.addEventListener("keydown", (e) => {
+  if (e.code === "Enter") {
+    list.innerHTML += `<li>${inputToDo.value} <button id="erase">X</button</li>`;
+    inputToDo.value = "";
+  }
+});
+
+// buttonToErase.addEventListener("click", () => {
+//   console.log("palo");
+// });
+
+const robot = {
+  currentActivty: undefined,
+  walk() {
+    this.currentActivty = "walking";
+    return this;
+  },
+  talk() {
+    this.currentActivty = "talking";
+    return this;
+  },
+};
+
+console.log(robot.walk().talk());
+
+//
+//
+
+class Cat {
+  static species = "Feliz catus";
+  #isSleeping;
+  paws = 4;
+  sound = "meow";
+
+  constructor(name, favoriteToy) {
+    this.name = name;
+    this.favoriteToy = favoriteToy;
+  }
+  static herd() {
+    throw new Error(`You can't do that`);
+  }
+  play() {
+    console.log(
+      `${this.name} is playing with ${this.favoriteToy} on his ${this.paws} paws`
+    );
+    this.#takeNap();
+  }
+  #takeNap() {
+    this.#isSleeping = true;
+  }
+}
+
+const cat1 = new Cat("Milo", "tinfoil");
+const cat2 = new Cat("Otto", "box");
+
+cat1.play();
+
+console.log(cat1);
+console.log(cat2);
+
+console.log("///////////////////////");
+
+class ShortHair extends Cat {
+  fur = "short";
+
+  constructor(name, favoriteToy) {
+    super(name, favoriteToy);
+  }
+}
+
+const cat3 = new ShortHair("Pololo", "keyboard");
+
+console.log(cat3);
+
+//
+//
+//
+
+const buttonToPlay = document.getElementById("botonJugar");
+const selectionOfPlayer = document.getElementById("rPS");
+const plays = ["tijera", "papel", "piedra"];
+
+// buttonToPlay.addEventListener("click", () => {
+//   const randomSelection = Math.floor(Math.random() * 3);
+//   if (selectionOfPlayer.value == plays[randomSelection]) {
+//     alert("Empate");
+//   } else if (
+//     plays[randomSelection == "tijera" && selectionOfPlayer.value == "piedra"]
+//   ) {
+//     alert("Player ha ganado a CPU con piedra");
+//   } else if (
+//     plays[randomSelection] == "papel" &&
+//     selectionOfPlayer.value == "piedra"
+//   ) {
+//     alert("CPU ha ganado a Player con papel");
+//   } else if(plays[randomSelection] == "piedra" && selectionOfPlayer.value == "papel")
+
+//   console.log(randomSelection);
+// });
+
+buttonToPlay.addEventListener("click", () => {
+  const randomSelection = Math.floor(Math.random() * 3);
+  if (
+    selectionOfPlayer.value == "tijera" &&
+    plays[randomSelection] == "papel"
+  ) {
+    alert("Player gana a Papel con Tijeras");
+  } else if (
+    selectionOfPlayer.value == "papel" &&
+    plays[randomSelection == "piedra"]
+  ) {
+    alert("Player gana a Piedra con Papel");
+  } else if (
+    selectionOfPlayer.value == "piedra" &&
+    plays[randomSelection] == "tijera"
+  ) {
+    alert("Player gana a Tijeras con Piedra");
+  } else if (selectionOfPlayer.value === plays[randomSelection]) {
+    alert("Empate");
+  } else {
+    alert(
+      `CPU gana a ${selectionOfPlayer.value} con ${plays[randomSelection]}`
+    );
+  }
+  console.log(plays[randomSelection]);
+});
+
+//
+//
+//
+
+const mousePosition = document.getElementById("mousePosition");
+const savedPosition = document.getElementById("clickedPosition");
+const trackingArea = document.getElementById("trackingArea");
+let currentColor = "red";
+let painting = false;
+let currentSize = 6;
+
+trackingArea.addEventListener("mousemove", (e) => {
+  mousePosition.innerHTML = `X: ${e.offsetX}, Y: ${e.offsetY}`;
+
+  if (painting) {
+    const divsito = document.createElement("div");
+    divsito.style.position = "absolute";
+    divsito.style.backgroundColor = currentColor;
+    divsito.style.width = `${currentSize}px`;
+    divsito.style.height = `${currentSize}px`;
+    divsito.style.borderRadius = "50%";
+    divsito.style.pointerEvents = "none";
+    divsito.style.top = `${e.offsetY - 5}px`;
+    divsito.style.left = `${e.offsetX - 5}px `;
+
+    trackingArea.appendChild(divsito);
+  }
+});
+
+trackingArea.addEventListener("mousedown", (e) => {
+  painting = true;
+
+  const savePosition = mousePosition.innerHTML;
+  savedPosition.innerHTML = `You clicked on ${savePosition}`;
+
+  const divsito = document.createElement("div");
+  divsito.style.position = "absolute";
+  divsito.style.backgroundColor = currentColor;
+  divsito.style.width = `${currentSize}px`;
+  divsito.style.height = `${currentSize}px`;
+  divsito.style.borderRadius = "50%";
+  divsito.style.pointerEvents = "none";
+  divsito.style.top = `${e.offsetY - 3}px`;
+  divsito.style.left = `${e.offsetX - 3}px `;
+
+  trackingArea.appendChild(divsito);
+});
+
+window.addEventListener("mouseup", () => {
+  painting = false;
+});
+
+trackingArea.addEventListener("mouseleave", () => {
+  painting = false;
+});
+
+window.addEventListener("keydown", (e) => {
+  if (e.code == "KeyB") {
+    currentColor = "blue";
+  } else if (e.code == "KeyR") {
+    currentColor = "red";
+  } else if (e.code == "KeyG") {
+    currentColor = "green";
+  } else if (e.code == "Equal") {
+    currentSize += 1;
+  } else if (e.code == "Minus") {
+    currentSize -= 1;
+  } else if (e.code == "KeyJ") {
+    trackingArea.innerHTML = "";
+  }
+});

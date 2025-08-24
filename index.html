@@ -8,6 +8,12 @@
     <title>Book test</title>
   </head>
   <body>
+    <h1>
+      si te he fallado t pido perdon de la unica forma que se, abriendo las
+      puertas de mi corazon para cuando decidas volver. orque nunca habra nadie
+      que pueda llena el vacio que dejas en mi
+    </h1>
+
     <div id="message"></div>
     <div id="">
       <label for="numberToGuess">Choose a number between 0 - 100</label>
@@ -48,7 +54,6 @@
     </div>
 
     <br /><br />
-
     <div>
       <label for="name">Look a name in our name database</label><br />
       <input
@@ -61,6 +66,16 @@
       <br /><br />
     </div>
 
+    <div id="trackingArea"></div>
+    <span>Press J to Clear</span><br />
+    <span>Press G to Green</span><br />
+    <span>Press B to Blue</span><br />
+    <span>Press R to Red</span><br />
+    <span>Press + to Big Size</span><br />
+    <span>Press - to Small Size</span>
+    <br />
+    <br />
+
     <div id="containerNumber">
       <label for=""
         >A ver si puedes adivinar el numero que estoy pensando</label
@@ -71,5 +86,26 @@
 
       <span id="result"></span>
     </div>
+    <br /><br />
+    <div id="toDoList">
+      <label for="inputToDo">Enter a toDo</label>
+      <input type="text" id="inputToDo" />
+      <ul id="list"></ul>
+    </div>
+
+    <div id="rockPaperScisors">
+      <h1>Vamos a jugar piedra, papel o tijeras!</h1>
+      <select name="game" id="rPS">
+        <option value="" disabled selected>Selecciona una opcion</option>
+        <option value="tijera">Tijera</option>
+        <option value="piedra">Piedra</option>
+        <option value="papel">Papel</option>
+      </select>
+      <button id="botonJugar">A JUGAR!</button>
+    </div>
+
+    <h1 id="mousePosition"></h1>
+    <br />
+    <h2 id="clickedPosition"></h2>
   </body>
 </html>
