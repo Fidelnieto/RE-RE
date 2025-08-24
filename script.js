@@ -445,18 +445,33 @@ guessValue.addEventListener("keydown", (e) => {
 
 const inputToDo = document.getElementById("inputToDo");
 const list = document.getElementById("list");
-const buttonToErase = document.getElementById("erase");
+const noteArray = [];
 
 inputToDo.addEventListener("keydown", (e) => {
-  if (e.code === "Enter") {
-    list.innerHTML += `<li>${inputToDo.value} <button id="erase">X</button</li>`;
+  if (e.code === "Enter" && inputToDo.value !== "") {
+    noteArray.push(inputToDo.value);
+    renderList();
     inputToDo.value = "";
+    console.log(noteArray);
   }
 });
 
-// buttonToErase.addEventListener("click", () => {
-//   console.log("palo");
-// });
+function renderList() {
+  list.innerHTML = "";
+  noteArray.forEach((x, i) => {
+    list.innerHTML += `<li>${x}<button class="erase" data-index="${i}">X</button></li>`;
+  });
+}
+
+list.addEventListener("click", (e) => {
+  console.log(e.target.classList.contains("erase"));
+  if (e.target.classList.contains("erase")) {
+    console.log(e.target.dataset.index);
+    let index = e.target.dataset.index;
+    noteArray.splice(index, 1);
+    renderList();
+  }
+});
 
 const robot = {
   currentActivty: undefined,
