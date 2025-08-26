@@ -459,7 +459,7 @@ inputToDo.addEventListener("keydown", (e) => {
 function renderList() {
   list.innerHTML = "";
   noteArray.forEach((x, i) => {
-    list.innerHTML += `<li>${x}<button class="erase" data-index="${i}">X</button></li>`;
+    list.innerHTML += `<li>${x}<button class="check" data-index="${i}">V</button> <button class="erase" data-index="${i}">X</button></li>`;
   });
 }
 
@@ -470,6 +470,8 @@ list.addEventListener("click", (e) => {
     let index = e.target.dataset.index;
     noteArray.splice(index, 1);
     renderList();
+  } else if (e.target.classList.contains("check")) {
+    e.target.style.backgroundColor = "green";
   }
 });
 
@@ -568,22 +570,26 @@ buttonToPlay.addEventListener("click", () => {
     selectionOfPlayer.value == "tijera" &&
     plays[randomSelection] == "papel"
   ) {
-    alert("Player gana a Papel con Tijeras");
+    setTimeout(() => alert("Player gana a Papel con Tijeras"), 2000);
   } else if (
     selectionOfPlayer.value == "papel" &&
     plays[randomSelection == "piedra"]
   ) {
-    alert("Player gana a Piedra con Papel");
+    setTimeout(() => alert("Player gana a Piedra con Papel"), 2000);
   } else if (
     selectionOfPlayer.value == "piedra" &&
     plays[randomSelection] == "tijera"
   ) {
-    alert("Player gana a Tijeras con Piedra");
+    setTimeout(() => alert("Player gana a Tijeras con Piedra"), 2000);
   } else if (selectionOfPlayer.value === plays[randomSelection]) {
-    alert("Empate");
+    setTimeout(() => alert("Empate"), 2000);
   } else {
-    alert(
-      `CPU gana a ${selectionOfPlayer.value} con ${plays[randomSelection]}`
+    setTimeout(
+      () =>
+        alert(
+          `CPU gana a ${selectionOfPlayer.value} con ${plays[randomSelection]}`
+        ),
+      2000
     );
   }
   console.log(plays[randomSelection]);
@@ -660,3 +666,53 @@ window.addEventListener("keydown", (e) => {
     trackingArea.innerHTML = "";
   }
 });
+async function openBook() {
+  try {
+    const bookText = await bookLoad();
+    displayArea.innerText = bookText;
+  } catch (e) {
+    displayArea.innerText = e;
+  }
+}
+
+function bookLoad(url) {
+  return new Promise(function (resolve, reject) {
+    let request = new XMLHttpRequest();
+    request.open("GET", url);
+    request.onload = function () {
+      if (request.status === 200) {
+        resolve(request.response);
+      } else {
+        reject(Error(`The text couldn't be loaded: ${request.statusText}`));
+      }
+    };
+    request.onerror = function () {
+      reject(Error(`There was a network error: `));
+    };
+    request.send();
+  });
+}
+
+const displayArea = document.getElementById("text-display-area");
+
+openBook();
+
+//
+//
+//
+
+async function fetchTheData(url) {
+  try {
+    const response = await fetch(url);
+    if (response.status >= 200 && response.status <= 299) {
+      return response.json();
+    } else {
+      throw Error(response.status);
+    }
+  } catch (e) {
+    console.log(`${e} the eroror`);
+  }
+}
+
+const tryOne = fetchTheData(`https://api.github.com/orgs/facebook`);
+console.log(tryOne);

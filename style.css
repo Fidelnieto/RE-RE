@@ -4,3 +4,7 @@
   border: 1px solid;
   position: relative;
 }
+
+#toDoList {
+  font-size: 25px;
+}
