@@ -13,8 +13,13 @@
         <h1>Whack a Mole!</h1>
         <p>Try to hit the moles as fast as you can!</p>
         <div id="timeNPoints">
-          <span id="spanTime">Time: 50</span>
-          <span id="spanPoints">Points</span>
+          <span id="spanTime">Time: 30</span>
+          <select name="difSelection" id="difSelection">
+            <option value="easy">Easy</option>
+            <option value="normal" selected>Normal</option>
+            <option value="hard">Hard</option>
+          </select>
+          <span id="spanPoints">Points: 0</span>
         </div>
       </div>
       <div id="moleZone">
@@ -29,6 +34,7 @@
         <div class="item-9"></div>
       </div>
       <button id="buttonStart">Start!</button>
+      <button id="buttonReset">Reset</button>
     </div>
   </body>
 </html>

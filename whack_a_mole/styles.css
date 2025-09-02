@@ -1,8 +1,28 @@
+body {
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTGmILLF7bRCmwUIX57dZaiDREaU3L1AQ4RQ&s);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+h1 {
+  text-align: center;
+}
+
+span,
+p {
+  font-size: 20px;
+}
+
 #container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#timeNPoints {
+  margin-bottom: 10px;
 }
 
 #moleZone {
@@ -12,7 +32,8 @@
   border: 0.2px solid black;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 1px;
+  gap: 5px;
+  margin: 5px 5px 5px 5px;
   border-radius: 9px;
 }
 
@@ -36,6 +57,14 @@
   border-radius: 5px;
 }
 
+#buttonReset {
+  margin-top: 10px;
+  width: 80px;
+  border: 0.1px solid;
+  border-radius: 5px;
+  display: none;
+}
+
 #buttonStart:hover {
   transform: scale(1.5);
 }
@@ -43,4 +72,8 @@
 #timeNPoints {
   display: flex;
   justify-content: space-between;
+}
+
+.mole {
+  background-color: red;
 }
