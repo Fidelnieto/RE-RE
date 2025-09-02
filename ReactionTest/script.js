@@ -89,7 +89,7 @@ buttonReset[0].addEventListener("click", () => {
 });
 
 clearButton[0].addEventListener("click", () => {
-  bestTime.innerHTML = "Best time: ";
+  bestTime.innerHTML = "";
   scoreList.innerHTML = "";
   localStorage.setItem("scoresHTML", scoreList.innerHTML);
   localStorage.setItem("bestTimeHTML", bestTime.innerHTML);

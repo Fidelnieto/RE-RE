@@ -1,0 +1,46 @@
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#moleZone {
+  display: grid;
+  width: 500px;
+  height: 300px;
+  border: 0.2px solid black;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1px;
+  border-radius: 9px;
+}
+
+.item-1,
+.item-2,
+.item-3,
+.item-4,
+.item-5,
+.item-6,
+.item-7,
+.item-8,
+.item-9 {
+  border: 0.2px solid black;
+  border-radius: 3px;
+}
+
+#buttonStart {
+  margin-top: 10px;
+  width: 80px;
+  border: 0.1px solid;
+  border-radius: 5px;
+}
+
+#buttonStart:hover {
+  transform: scale(1.5);
+}
+
+#timeNPoints {
+  display: flex;
+  justify-content: space-between;
+}
