@@ -5,12 +5,20 @@ const points = document.querySelector("#spanPoints");
 const difSelection = document.getElementById("difSelection");
 const buttonReset = document.querySelector("#buttonReset");
 
+//Score things
+const openScores = document.querySelector("#openScores");
+const screenScore = document.querySelector("#screenScore");
+const closeScore = document.querySelector("#closeScore");
+const scoreList = document.querySelector("#scoreList");
+
 let intervalTimerId;
 let intervalPickId;
 let timer = 5;
 let state = "idle";
 let lastItemPicked = [];
-let score = 0;
+let pointos;
+let score = localStorage.getItem("score");
+let scoreListArray = [];
 
 let difficulty = {
   easy: 1200,
@@ -33,12 +41,19 @@ const mole = document.querySelectorAll("div#moleZone > div");
 function renderScore() {
   //RENDERING SCORE
   points.innerHTML = `Points: ${score}`;
+  scoreListArray.map((n) => {
+    scoreList.innerHTML = `<li>${n}</li>`;
+  });
 }
 setInterval(renderScore, 100); //Little rendering everymilisecond
+
+function addOneToScore() {}
 
 function timerCounter() {
   //TIMER AND PICK INTERVAL
   buttonStart.style.display = "none";
+  localStorage.setItem("score", 0);
+  score = 0;
 
   state = "running";
   intervalTimerId = setInterval(() => {
@@ -57,10 +72,13 @@ function timerCounter() {
       clearInterval(intervalPickId);
       state = "finish";
       console.log("STOP PICKING");
+
+      scoreListArray.push(score);
+      console.log(scoreListArray);
+
       buttonReset.style.display = "block";
     } else {
       randomPick();
-      console.log();
     }
   }, difficulty[difSelection.value]); //CHANGE DIFFICULTY HERE, FASTER MOLES
 }
@@ -74,6 +92,7 @@ function randomPick() {
     console.log("clicked");
     itemPicked.style.backgroundColor = "transparent";
     score++;
+    localStorage.setItem("score", score);
   }
 
   if (lastItemPicked[lastItemPicked.length - 1] == randomNumber) {
@@ -97,10 +116,24 @@ function randomPick() {
 
 buttonStart.addEventListener("click", timerCounter); // START BUTTON
 buttonReset.addEventListener("click", () => {
-  time.innerHTML = `Time: 30`;
-  points.innerHTML = `Points: 0`;
-  timer = 30;
+  score = 0;
+  localStorage.setItem("score", 0);
+  timer = 4;
+  time.innerHTML = `Time: ${timer}`;
+  points.innerHTML = `Points: ${score}`;
+
   state = "idle";
+
   buttonStart.style.display = "block";
   buttonReset.style.display = "none";
+});
+
+// SCORE THINGS
+
+openScores.addEventListener("click", () => {
+  screenScore.style.display = "block";
+});
+
+closeScore.addEventListener("click", () => {
+  screenScore.style.display = "none";
 });
