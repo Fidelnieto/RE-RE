@@ -18,7 +18,8 @@ let state = "idle";
 let lastItemPicked = [];
 let pointos;
 let score = localStorage.getItem("score");
-let scoreListArray = [];
+let scoreListArray = localStorage.getItem("scoreListArray" || 0);
+let array = [];
 
 let difficulty = {
   easy: 1200,
@@ -41,11 +42,16 @@ const mole = document.querySelectorAll("div#moleZone > div");
 function renderScore() {
   //RENDERING SCORE
   points.innerHTML = `Points: ${score}`;
-  scoreListArray.map((n) => {
-    scoreList.innerHTML = `<li>${n}</li>`;
-  });
 }
 setInterval(renderScore, 100); //Little rendering everymilisecond
+
+setInterval(() => {
+  scoreList.innerHTML = "";
+  for (let i = 0; i < scoreListArray.length; i += 2) {
+    scoreList.innerHTML += `<li>${scoreListArray[i]}</li>`;
+    console.log(scoreListArray[i]);
+  }
+}, 5000);
 
 function addOneToScore() {}
 
@@ -73,7 +79,10 @@ function timerCounter() {
       state = "finish";
       console.log("STOP PICKING");
 
-      scoreListArray.push(score);
+      array.push(score);
+      scoreListArray = (scoreListArray ? scoreListArray : ">") + "," + score;
+      localStorage.setItem("scoreListArray", scoreListArray || "");
+
       console.log(scoreListArray);
 
       buttonReset.style.display = "block";
