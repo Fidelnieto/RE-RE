@@ -1,0 +1,15 @@
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#time {
+  align-content: center;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  border: 0.1px solid black;
+  border-radius: 40px;
+}

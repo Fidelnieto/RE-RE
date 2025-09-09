@@ -1,0 +1,20 @@
+#container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#gameZone {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  width: 550px;
+  height: 500px;
+  border: 0.2px solid black;
+}
+
+#snakeHead {
+  background-color: lightgray;
+}
